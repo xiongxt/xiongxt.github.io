@@ -13,5 +13,12 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint'
+  },
+  rules: {
+    semi: ['error', 'always', {
+      omitLastInOneLineBlock: true
+    }],
+    indent: ['error', 4],
+    'no-debugger': 0
   }
 }
