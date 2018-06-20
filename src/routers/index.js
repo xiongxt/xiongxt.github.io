@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import XRenderIndex from './views/xrender/index';
+import Home from '../views/Home.vue';
+import xrenderRouter from './xrender';
 
 Vue.use(Router);
 
@@ -11,10 +11,6 @@ export default new Router({
         name: 'home',
         component: Home
     },
-    {
-        path: '/xrender',
-        name: 'xrender',
-        component: XRenderIndex
-    }
+    xrenderRouter
     ]
 });
