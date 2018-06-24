@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js");
 
 importScripts(
-  "/dist/precache-manifest.37787e0fd3ba0dd11653241b716f54d5.js"
+  "/dist/precache-manifest.6ed6e8e8991c86124cd76de2eb764742.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "xiongxt.github.io"});

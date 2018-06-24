@@ -19,6 +19,7 @@ module.exports = {
       omitLastInOneLineBlock: true
     }],
     indent: ['error', 4],
-    'no-debugger': 0
+    'no-debugger': 0,
+    'no-undef': 0
   }
 }

@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "iview": "^2.14.2",
+    "jquery": "^3.3.1",
+    "layui-src": "^2.3.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "xrender": "^1.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
