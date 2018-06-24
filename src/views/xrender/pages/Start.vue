@@ -1,6 +1,7 @@
 <template lang="pug">
 .page
     h1 开始
+    p xrender，是一个使用canvas绘图，并模拟dom操作方式的库。支持通过css、event、animate来控制canvas内的图形。
     h3 安装
     Code npm install xrender -S
 
@@ -75,7 +76,7 @@ export default {
             });
         });
         this.circle.on('mouseleave', () => {
-            this.circle.setStyle({
+            this.circle.animate({
                 'background-color': 'red'
             });
         });
