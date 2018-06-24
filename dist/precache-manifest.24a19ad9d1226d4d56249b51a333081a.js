@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "2c2ae068be3b089e0a5b59abb1831550",
-    "url": "/dist/fonts/ionicons.2c2ae068.eot"
+    "revision": "a965966baa59ad4410484159855c8367",
+    "url": "/dist/fonts/iconfont.a965966b.ttf"
   },
   {
     "revision": "dd9132b50f7d58fc2e2e7c96f61936ca",
@@ -28,16 +28,16 @@ self.__precacheManifest = [
     "url": "/dist/img/iconfont.471366a4.svg"
   },
   {
+    "revision": "2c2ae068be3b089e0a5b59abb1831550",
+    "url": "/dist/fonts/ionicons.2c2ae068.eot"
+  },
+  {
     "revision": "24712f6c47821394fba7942fbb52c3b2",
     "url": "/dist/fonts/ionicons.24712f6c.ttf"
   },
   {
     "revision": "05acfdb568b3df49ad31355b19495d4a",
     "url": "/dist/fonts/ionicons.05acfdb5.woff"
-  },
-  {
-    "revision": "a965966baa59ad4410484159855c8367",
-    "url": "/dist/fonts/iconfont.a965966b.ttf"
   },
   {
     "revision": "8dc46464fd93a0c95c2b754948966152",
