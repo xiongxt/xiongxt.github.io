@@ -1,7 +1,7 @@
 <template lang="pug">
-Menu(theme="dark" width="auto" @on-select="selectMenu")
+Menu(theme="dark" width="auto" @on-select="selectMenu" :active-name="activeName")
     MenuGroup(:title="group.title" v-for="(group, groupIndex) in data" :key="group.title")
-        MenuItem(v-for="(item, itemIndex) in group.items" :key="item.name" :name="groupIndex+'-'+itemIndex")
+        MenuItem(v-for="(item, itemIndex) in group.items" :key="item.name" :name="item.path")
             Icon(:type="item.icon")
             | {{item.name}}
 </template>
@@ -10,16 +10,19 @@ Menu(theme="dark" width="auto" @on-select="selectMenu")
 export default {
     data () {
         return {
+            activeName: '',
             data: [
                 {
                     title: '基础',
                     items: [
                         {
                             icon: 'document-text',
-                            name: 'Getting Started'
+                            name: 'Getting Started',
+                            path: 'start'
                         }, {
                             icon: 'document-text',
-                            name: 'Render对象'
+                            name: 'Render对象',
+                            path: 'render'
                         }
                     ]
                 }, {
@@ -27,25 +30,32 @@ export default {
                     items: [
                         {
                             icon: 'document-text',
-                            name: 'Node'
+                            name: 'Node',
+                            path: 'node'
                         }, {
                             icon: 'document-text',
-                            name: 'Circle'
+                            name: 'Circle',
+                            path: 'circle'
                         }, {
                             icon: 'document-text',
-                            name: 'Rect'
+                            name: 'Rect',
+                            path: 'rect'
                         }, {
                             icon: 'document-text',
-                            name: 'Line'
+                            name: 'Line',
+                            path: 'line'
                         }, {
                             icon: 'document-text',
-                            name: 'Sector'
+                            name: 'Sector',
+                            path: 'sector'
                         }, {
                             icon: 'document-text',
-                            name: 'Image'
+                            name: 'Image',
+                            path: 'image'
                         }, {
                             icon: 'document-text',
-                            name: 'Collection'
+                            name: 'Collection',
+                            path: 'collection'
                         }
                     ]
                 }, {
@@ -53,13 +63,16 @@ export default {
                     items: [
                         {
                             icon: 'document-text',
-                            name: 'style'
+                            name: 'style',
+                            path: 'style'
                         }, {
                             icon: 'document-text',
-                            name: 'attribute'
+                            name: 'attribute',
+                            path: 'attribute'
                         }, {
                             icon: 'document-text',
-                            name: 'event'
+                            name: 'event',
+                            path: 'event'
                         }
                     ]
                 }
@@ -68,11 +81,12 @@ export default {
     },
     methods: {
         selectMenu (name) {
-            let indexs = name.split('-').map(index => parseInt(index));
-            debugger;
-            let item = this.data[indexs[0]].items[indexs[1]];
-            console.log(item);
+            console.log(this);
+            this.$router.push('/xrender/' + name);
         }
+    },
+    mounted () {
+        this.activeName = this.$route.name;
     }
 };
 </script>

@@ -34,7 +34,7 @@
             });
         });
         this.circle.on('mouseleave', () => {
-            this.circle.setStyle({
+            this.circle.animate({
                 'background-color': 'red'
             });
         });
@@ -65,7 +65,7 @@ export default {
             fill: true,
             stroke: false,
             'z-index': 1,
-            cursor: 'pointer',
+            cursor: 'move',
             'background-color': 'red'
         }, {
             draggable: true
