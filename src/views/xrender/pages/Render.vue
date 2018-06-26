@@ -12,32 +12,21 @@
         let render = xrender.init(selector, scale);
         render.addChild(new xrender.Circle(styles, attrs));
         render.render();
-    Table(border :columns="[{title:'方法名'},{},{}]" :data="attrData")
-    h3 方法
+    FuncTable(:data="xrenderFuncs")
     h3 属性
-    Table(border :columns="attrColumn" :data="attrData")
+    AttrTable(:data="renderAttrs")
     h3 方法
-    Table(border :columns="attrColumn" :data="attrData")
+    FuncTable(:data="renderFuncs")
 </template>
 
 <script>
 import Code from '../../../components/Code';
+import FuncTable from '../../../components/FuncTable';
+import AttrTable from '../../../components/AttrTable';
 export default {
     data () {
         return {
-            attrColumn: [
-                {
-                    title: '属性名',
-                    key: 'name'
-                }, {
-                    title: '描述',
-                    key: 'desc'
-                }, {
-                    title: '类型',
-                    key: 'type'
-                }
-            ],
-            attrData: [
+            renderAttrs: [
                 {
                     name: 'root',
                     desc: 'Render对象下的根节点',
@@ -47,11 +36,39 @@ export default {
                     desc: '画布的运行环境对象，包含canvas、context、scale、width、height等参数，并且每个Node都拥有此对象的参数',
                     type: 'Object'
                 }
+            ],
+            renderFuncs: [
+                {
+                    name: 'render',
+                    desc: '绘制图形到画布',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'addChild',
+                    desc: '添加图形到画布内',
+                    params: 'Node 需要添加的图形实例',
+                    return: '无'
+                }, {
+                    name: 'delChild',
+                    desc: '删除图形',
+                    params: 'Node 需要删除的图形实例',
+                    return: '无'
+                }
+            ],
+            xrenderFuncs: [
+                {
+                    name: 'init',
+                    desc: '初始化',
+                    params: 'selector/dom 必选参数 | scale 可选参数，用来设置移动端的ppi',
+                    return: 'Render对象'
+                }
             ]
         };
     },
     components: {
-        Code
+        Code,
+        FuncTable,
+        AttrTable
     }
 };
 </script>

@@ -44,6 +44,7 @@
 
 <script>
 import Code from '../../../components/Code';
+import FuncTable from '../../../components/FuncTable';
 export default {
     data () {
         return {
@@ -52,7 +53,8 @@ export default {
         };
     },
     components: {
-        Code
+        Code,
+        FuncTable
     },
     mounted () {
         this.render = this.xrender.init(this.$refs.renderDom);
