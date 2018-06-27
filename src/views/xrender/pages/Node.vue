@@ -7,9 +7,9 @@
     h3 属性
     AttrTable(:data="attrs")
     h3 私有方法
-    FuncTable(:data="funcs")
+    FuncTable(:data="privateFuncs")
     h3 公有方法
-    FuncTable(:data="funcs")
+    FuncTable(:data="publicFuncs")
 </template>
 
 <script>
@@ -53,6 +53,14 @@ export default {
                     desc: '节点的属性, 查看后续的文档了解细节',
                     type: 'Object'
                 }, {
+                    name: 'envoParams',
+                    desc: '运行环境变量，可查看render章节了解细节，通过mixin(node,envoParams), 将所有变量的值直接赋值给node',
+                    type: 'number'
+                }, {
+                    name: 'events',
+                    desc: '保存图形绑定的所有事件',
+                    type: 'Object'
+                }, {
                     name: 'children',
                     desc: '子节点图形',
                     type: 'Array'
@@ -90,30 +98,122 @@ export default {
                     type: 'number'
                 }
             ],
-            renderFuncs: [
+            privateFuncs: [
                 {
-                    name: 'render',
-                    desc: '绘制图形到画布',
+                    name: '_setMouseLocation',
+                    desc: '记录当前鼠标相对于canvas的坐标，也就是mouseX和mouseY，并调用_setOffsetPosition',
+                    params: 'x:number|y:number ',
+                    return: '无'
+                }, {
+                    name: '_setOffsetPosition',
+                    desc: '根据mouseX和mouseY，计算offsetX和offsetY，在实现拖拽时，这个方法非常重要，自定义图形时应该重写该方法',
                     params: '无',
                     return: '无'
                 }, {
-                    name: 'addChild',
-                    desc: '添加图形到画布内',
-                    params: 'Node 需要添加的图形实例',
+                    name: '_setDraggingPos',
+                    desc: '当拖拽进行时，根据mouseX、mouseY、offsetX、offsetY，去计算当前图形应该所处的位置，自定义图形时应该重写该方法',
+                    params: '无',
                     return: '无'
                 }, {
-                    name: 'delChild',
-                    desc: '删除图形',
-                    params: 'Node 需要删除的图形实例',
+                    name: '_checkPointInPath',
+                    desc: '检查当前鼠标是否再图形内',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: '_renderSelf',
+                    desc: '绘制自己, 具体由各个图形去实现',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: '_renderChildren',
+                    desc: '绘制自己的子图形，子图形的绘制顺序由图形的style[z-index]决定',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: '_setEnvo',
+                    desc: '设置每个图形的运行环境变量envoParams, 可查看 render 章节来详细了解envoParams',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: '_checkCursor',
+                    desc: '检查图形的style是否修改了默认cursor的值，如果是则通过mouseenter和mouseleave事件来模拟hover状态下鼠标图形修改',
+                    params: '无',
                     return: '无'
                 }
             ],
-            xrenderFuncs: [
+            publicFuncs: [
                 {
-                    name: 'init',
-                    desc: '初始化',
-                    params: 'selector/dom 必选参数 | scale 可选参数，用来设置移动端的ppi',
-                    return: 'Render对象'
+                    name: 'render',
+                    desc: '渲染图形，首先渲染自己，然后渲染子图形',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'lockOffset',
+                    desc: '设置offsetChangeAble为false，锁定图形的offsetX和offsetY',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'unlockOffset',
+                    desc: '和上面的方法相反',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'setStyle',
+                    desc: '设置图形的style对象，并且默认会触发重绘',
+                    params: 'style:object, repaint:boolean @default=true',
+                    return: '无'
+                }, {
+                    name: 'setAttr',
+                    desc: '设置图形的attr对象，并默认不会触发重绘',
+                    params: 'attr:object, repaint:boolean @default=false',
+                    return: '无'
+                }, {
+                    name: 'addChild',
+                    desc: '新增子图形',
+                    params: 'node:Node',
+                    return: '无'
+                }, {
+                    name: 'delChild',
+                    desc: '删除子图形',
+                    params: 'node:Node',
+                    return: '无'
+                }, {
+                    name: 'setParent',
+                    desc: '设置父图形',
+                    params: 'node:Node',
+                    return: '无'
+                }, {
+                    name: 'on',
+                    desc: '绑定事件',
+                    params: 'name:string, callback:function',
+                    return: '无'
+                }, {
+                    name: 'off',
+                    desc: '取消事件,如果callback为空，则取消该事件名下的所有事件',
+                    params: 'name:string, callback:function',
+                    return: '无'
+                }, {
+                    name: 'fireEvent',
+                    desc: '触发事件',
+                    params: 'name:string, data:object 传递给回掉的参数',
+                    return: '无'
+                }, {
+                    name: 'fireMouseMoveEvents',
+                    desc: '触发mousemove事件，并通过mouseStatus计算是否出发mouseenter事件',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'fireMouseLeaveEvents',
+                    desc: '通过mouseStatus计算，是否真正触发mouseleave',
+                    params: '无',
+                    return: '无'
+                }, {
+                    name: 'fireClickEvents',
+                    desc: '触发click事件',
+                    params: '',
+                    return: ''
+                }, {
+                    name: 'fireMoveNotInPath'
                 }
             ]
         };
